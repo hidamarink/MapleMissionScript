@@ -9,6 +9,14 @@ free_count = 0
 
 while(True):
     
+    auto_task_pos = exists(Template(r"tpl1658164859868.png", record_pos=(-0.169, 0.228), resolution=(1280, 720)))
+    if(auto_task_pos):
+        print("检测到正在执行自动任务 等待")
+        sleep(2)
+        free_count = 0
+        continue
+
+    
     auto_nav_pos = exists(Template(r"tpl1658156262845.png", record_pos=(-0.087, -0.125), resolution=(1280, 720)))
     if(auto_nav_pos):
         print("正在进行自动寻路")
@@ -18,8 +26,8 @@ while(True):
 
 
 
-    if(free_count > 10):
-        
+    if(free_count >= 5):
+        print("空置回数到达 %d 回 寻找新任务" %(free_count))
         mission_pos = exists(Template(r"tpl1658155662997.png", record_pos=(-0.427, -0.122), resolution=(1280, 720)))
 
         if(mission_pos):
@@ -91,7 +99,6 @@ while(True):
         print("点击附近任务枫叶书")
         free_count = 0
         continue
-    
     
     free_count+=1
     print("空置 %d 回" %(free_count))
