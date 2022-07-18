@@ -1,5 +1,5 @@
 # -*- encoding=utf8 -*-
-__author__ = "xiake"
+__author__ = "Kyuu"
 
 from airtest.core.api import *
 
