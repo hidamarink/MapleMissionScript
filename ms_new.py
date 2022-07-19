@@ -86,7 +86,9 @@ while(True):
         free_count = 0
         continue
     
-    light_pos = exists(Template(r"tpl1658157548248.png", record_pos=(-0.001, 0.084), resolution=(1280, 720)))
+    light_pos = exists(Template(r"tpl1658217184714.png", record_pos=(-0.337, 0.041), resolution=(1280, 720)))
+
+
     if(light_pos):
         touch(light_pos)
         print("点击附近任务灯泡")
@@ -100,6 +102,16 @@ while(True):
         free_count = 0
         continue
     
+    start_mission_pos = exists(Template(r"tpl1658211983991.png", record_pos=(-0.176, 0.166), resolution=(1280, 720)))
+    finish_mission_pos = exists(Template(r"tpl1658212236510.png", record_pos=(-0.174, 0.166), resolution=(1280, 720)))
+    if(finish_mission_pos):
+        touch(finish_mission_pos)
+        continue
+    if(start_mission_pos):
+        touch(start_mission_pos)
+        continue
+    
+    
     free_count+=1
     print("空置 %d 回" %(free_count))
 
@@ -107,6 +119,7 @@ while(True):
     
         
         
+
 
 
 
