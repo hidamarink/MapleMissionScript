@@ -21,6 +21,10 @@ light_temp = Template(r"tpl1658222839643.png", record_pos=(0.089, 0.075), resolu
 maple_book_temp = Template(r"tpl1658159739966.png", record_pos=(0.151, 0.077), resolution=(1280, 720))
 start_mission_temp = Template(r"tpl1658211983991.png", record_pos=(-0.176, 0.166), resolution=(1280, 720))
 finish_mission_temp = Template(r"tpl1658212236510.png", record_pos=(-0.174, 0.166), resolution=(1280, 720))
+hot_and_new_temp = Template(r"tpl1658248457448.png", record_pos=(-0.352, -0.227), resolution=(1280, 720))
+map_loading_temp = Template(r"tpl1658249095159.png", record_pos=(0.333, -0.212), resolution=(1280, 720))
+
+
 
 
 while(True):
@@ -46,6 +50,12 @@ while(True):
         free_count = 0
         continue
 
+    map_loading_pos = map_loading_temp.match_in(screen)
+    if(map_loading_pos):
+        print("过图加载中。。。")
+        sleep(2)
+        free_count = 0
+        continue
 
 
     if(free_count >= 5):
@@ -53,7 +63,7 @@ while(True):
         mission_pos = mission_temp.match_in(screen)
         if(mission_pos):
             #直接点击第一栏任务区域
-            touch(mission_pos)
+            touch([99,200])
             print("主动点击任务")
             free_count = 0
             continue
@@ -123,7 +133,7 @@ while(True):
             touch(light_pos)
             print("点击附近任务灯泡")
             light_lock = True
-            free_count = 0
+            free_count = 1
             sleep(2)
             continue
         
@@ -149,6 +159,12 @@ while(True):
         sleep(2)
         continue
     
+    hot_and_new_pos = hot_and_new_temp.match_in(screen)
+    if(hot_and_new_pos):
+        print("关闭广告 HOT & NEW")
+        touch([1143,70])
+        sleep(2)
+        continue
     
     free_count+=1
     print("空置 %d 回" %(free_count))
