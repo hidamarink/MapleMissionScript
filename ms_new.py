@@ -6,8 +6,10 @@ from airtest.core.api import *
 auto_setup(__file__)
 
 free_count = 0
+check_triggle_count = 3
 light_lock = False
 wait_timeout = 1
+
 auto_task_temp = Template(r"tpl1658164859868.png", record_pos=(-0.169, 0.228), resolution=(1280, 720))
 auto_nav_temp = Template(r"tpl1658156262845.png", record_pos=(-0.087, -0.125), resolution=(1280, 720))
 mission_temp = Template(r"tpl1658155662997.png", record_pos=(-0.427, -0.122), resolution=(1280, 720))
@@ -24,6 +26,7 @@ start_mission_temp = Template(r"tpl1658211983991.png", record_pos=(-0.176, 0.166
 finish_mission_temp = Template(r"tpl1658212236510.png", record_pos=(-0.174, 0.166), resolution=(1280, 720))
 hot_and_new_temp = Template(r"tpl1658248457448.png", record_pos=(-0.352, -0.227), resolution=(1280, 720))
 map_loading_temp = Template(r"tpl1658249095159.png", record_pos=(0.333, -0.212), resolution=(1280, 720))
+fuhuo_temp = Template(r"tpl1658388124543.png", record_pos=(-0.193, 0.129), resolution=(1280, 720))
 
 
 
@@ -59,7 +62,16 @@ while(True):
         continue
 
 
-    if(free_count >= 3):
+    if(free_count >= check_triggle_count):
+        #优先处理复活         
+        fuhuo_pos = fuhuo_temp.match_in(screen)
+        if(fuhuo_pos):
+            touch(fuhuo_pos)
+            print("角色挂了 点击回城")
+            free_count = check_triggle_count
+            sleep(wait_timeout)
+            continue
+            
         print("空置回数到达 %d 回 寻找新任务" %(free_count))
         mission_pos = mission_temp.match_in(screen)
         if(mission_pos):
@@ -68,7 +80,7 @@ while(True):
             print("主动点击任务")
             free_count = 0
             continue
-            
+
     next_pos = next_temp.match_in(screen)
     if(next_pos):
         touch(next_pos)
