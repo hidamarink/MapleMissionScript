@@ -181,14 +181,3 @@ while(True):
     
     free_count+=1
     print("空置 %d 回" %(free_count))
-
-   
-    
-        
-        
-
-
-
-
-
-        
